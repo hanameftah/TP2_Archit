@@ -10,7 +10,9 @@ public class Etudiant {
 	    private int nbLivreEmprunte;
 	    private int id_universite;
 	    
-	   
+	    /**
+	     class Etudiant 
+	     */
 		public Etudiant(int matricule, String nom, String prenom, String email,String pwd, int id_universite) {
 			
 			this.matricule = matricule;
