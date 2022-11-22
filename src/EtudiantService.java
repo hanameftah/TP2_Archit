@@ -6,9 +6,10 @@ import java.util.ArrayList;
 public class EtudiantService implements IEtudiantService {
 	
 	 
-		   IEtudiantRepository IStudRep;
-		   IUniversiteRepository IUnivRep;
 		   
+	   IEtudiantRepository IStudRep;
+	    IUniversiteRepository IUnivRep;
+	   
 		   
 		   public EtudiantService(IEtudiantRepository iStudRep, IUniversiteRepository iUnivRep , IJournal ijournal ) {
 			    IStudRep = iStudRep;
@@ -28,35 +29,19 @@ public class EtudiantService implements IEtudiantService {
 	    Etudiant stud = EtdFact.creer(matricule, nom, prénom, email,pwd,id_universite);
 	    
 	    
-	   ("Log: début de l'opération d'ajout de l'étudiant avec matricule "+matricule);
+	    System.out.println ("Log: début de l'opération d'ajout de l'étudiant avec matricule "+matricule);
 	    
-	    if(email == null || email.length() == 0)
+	    if(IStudRep.ExistsEmail(email)  || IStudRep.Exists(matricule)) 
 	    {
 	    	return false;
 	    }
-	    
-	    if (StudRep.Exists(matricule))
-	    {
-	        return false;
-	    }
-	    
-		if (StudRep.Exists(email))
-	    {
-	        return false;
-	    }
+	   
 		
 		
 		
-		 if (univ.getPack() == TypePackage.Standard)
-	     {
-	          stud.setNbLivreMensuel_Autorise(10);
-	     }
-	     else if (univ.getPack() == TypePackage.Premium)
-	     {
-	    	 stud.setNbLivreMensuel_Autorise(10*2);
-	     }                           
+		                         
 	     
-		 StudRep.add(stud);
+		 IStudRep.add(stud);
 		 System.out.println("Log: Fin de l'opération d'ajout de l'étudiant avec matricule "+matricule);
 		 return true;
 	    
