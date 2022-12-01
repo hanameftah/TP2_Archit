@@ -9,11 +9,13 @@ public class EtudiantService implements IEtudiantService {
 		   
 	   IEtudiantRepository IStudRep;
 	    IUniversiteRepository IUnivRep;
+	   IJournal journal ;
 	   
 		   
-		   public EtudiantService(IEtudiantRepository iStudRep, IUniversiteRepository iUnivRep , IJournal ijournal ) {
+		   public EtudiantService(IEtudiantRepository iStudRep, IUniversiteRepository iUnivRep  ,  IJournal j) {
 			    IStudRep = iStudRep;
 			    IUnivRep = iUnivRep;
+			   this.journal=j;
 			   
 		   }
 		   
@@ -26,7 +28,7 @@ public class EtudiantService implements IEtudiantService {
 		   
 	boolean inscription (int matricule, String nom, String prénom, String email,String pwd, int id_universite) throws SQLException	
 	{
-	    Etudiant stud = EtdFact.creer(matricule, nom, prénom, email,pwd,id_universite);
+	  //  Etudiant stud = EtdFact.creer(matricule, nom, prénom, email,pwd,id_universite);
 	    
 	    
 	    System.out.println ("Log: début de l'opération d'ajout de l'étudiant avec matricule "+matricule);

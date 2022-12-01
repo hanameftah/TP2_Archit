@@ -5,14 +5,14 @@ import java.sql.SQLException;
 public class DBConnection {
 	   
 	private static DBConnection instance;
-		String BDD = "nomBD";
-		String url = "jdbc:mysql://localhost:3306/" + BDD;
+		String BDD = "Architecture";
+		String url = " http://localhost/phpmyadmin/index.php?route=/database/structure&server=1&db=architecture" + BDD;
 		String user = "root";
 		String passwd = "";
 	    private Connection conn;
-
 	   
-	    public DBConnection() throws SQLException {
+	   //on a déclarer le constructeur privé 
+	    private DBConnection() throws SQLException {
 			conn=DriverManager.getConnection(url, user,passwd);
 		}
 	    
@@ -21,7 +21,7 @@ public class DBConnection {
 		   else if (instance.getConn().isClosed()) instance = new DBConnection();
 		   return instance ;
 	   }
-	   
+	  
 
 	    
 	    public Connection getConn() {
