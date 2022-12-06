@@ -51,17 +51,17 @@ public class EtudiantService implements IEtudiantService {
 		{
 			return false;
 		}
-   if(univ.getPack() ==TypePackage.Standard) 
-   {
-	   stud.setNbLivreMensuel_Autorise(10);
-	   
-   }
-   else if (univ.getPack() == TypePackage.Premium)
-   {
-	   stud.setNbLivreMensuel_Autorise(10*2);
-   }
-		
-		
+		if(univ.getPack() ==TypePackage.Standard) 
+		   {
+			   stud.setNbLivreMensuel_Autorise(10);
+			   
+		   }
+		   else if (univ.getPack() == TypePackage.Premium)
+		   {
+			   stud.setNbLivreMensuel_Autorise(10*2);
+		   }
+				
+				
 		                         
 	     
 		
