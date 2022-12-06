@@ -17,6 +17,7 @@ public class EtudiantService implements IEtudiantService {
 			    IUnivRep = iUnivRep;
 			   this.journal=j;
 			   
+			   
 		   }
 		   
 	
@@ -28,23 +29,45 @@ public class EtudiantService implements IEtudiantService {
 		   
 	boolean inscription (int matricule, String nom, String prénom, String email,String pwd, int id_universite) throws SQLException	
 	{
-	  //  Etudiant stud = EtdFact.creer(matricule, nom, prénom, email,pwd,id_universite);
+	 EtudiantRepository StudRep=new EtudiantRepository(null);
+	 UniversiteRepository UnivRep =new UniversiteRepository();
+	 Etudiant stud =new Etudiant (matricule,nom,prénom,email,pwd,id_universite);
+	 Universite univ=UnivRep.GetById(id_universite);
 	    journal.Mssg("mssg: echec de l'ajout d'un etudiant avec le matricule"+matricule);
 	    
-	    System.out.println ("Log: début de l'opération d'ajout de l'étudiant avec matricule "+matricule);
+	    System.out.println ("mssg : début de l'opération d'ajout de l'étudiant avec matricule "+matricule);
 	    
 	    if(IStudRep.ExistsEmail(email)  || IStudRep.ExistsMat(matricule)) 
 	    {journal.Mssg("mssg: echec de l'ajout de l'etidiant car le matricule ou bien le mail n'existe pas ");
 	    	return false;
 	    }
+	    //peut etre l'etudiant avec email et matricule est déja inscrit 
+	   if(StudRep.Exists(matricule))
+	   {
+		   return false ;
+	   }
 	   
-		
+		if (StudRep.Exists(email))
+		{
+			return false;
+		}
+   if(univ.getPack() ==TypePackage.Standard) 
+   {
+	   stud.setNbLivreMensuel_Autorise(10);
+	   
+   }
+   else if (univ.getPack() == TypePackage.Premium)
+   {
+	   stud.setNbLivreMensuel_Autorise(10*2);
+   }
 		
 		
 		                         
 	     
 		
+		
 		IStudRep.add(stud);
+	
 		 journal.Mssg("Log: Fin de l'opération d'ajout de l'étudiant avec matricule "+matricule);
 		 return true;
 	    
