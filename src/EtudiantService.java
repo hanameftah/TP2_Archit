@@ -29,12 +29,12 @@ public class EtudiantService implements IEtudiantService {
 	boolean inscription (int matricule, String nom, String prénom, String email,String pwd, int id_universite) throws SQLException	
 	{
 	  //  Etudiant stud = EtdFact.creer(matricule, nom, prénom, email,pwd,id_universite);
-	    
+	    journal.Mssg("mssg: echec de l'ajout d'un etudiant avec le matricule"+matricule);
 	    
 	    System.out.println ("Log: début de l'opération d'ajout de l'étudiant avec matricule "+matricule);
 	    
-	    if(IStudRep.ExistsEmail(email)  || IStudRep.Exists(matricule)) 
-	    {
+	    if(IStudRep.ExistsEmail(email)  || IStudRep.ExistsMat(matricule)) 
+	    {journal.Mssg("mssg: echec de l'ajout de l'etidiant car le matricule ou bien le mail n'existe pas ");
 	    	return false;
 	    }
 	   
@@ -43,8 +43,9 @@ public class EtudiantService implements IEtudiantService {
 		
 		                         
 	     
-		 IStudRep.add(stud);
-		 System.out.println("Log: Fin de l'opération d'ajout de l'étudiant avec matricule "+matricule);
+		
+		IStudRep.add(stud);
+		 journal.Mssg("Log: Fin de l'opération d'ajout de l'étudiant avec matricule "+matricule);
 		 return true;
 	    
 		
